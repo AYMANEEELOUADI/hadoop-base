@@ -1,0 +1,17 @@
+version: "3"
+services:  
+  hue:
+    image: gethue/hue:latest
+    environment:
+      SERVICE_PRECONDITION: "192.168.56.114:50070 192.168.56.114:50075 192.168.56.114:5432 192.168.56.114:9083"
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./config/hue-overrides.ini:/usr/share/hue/desktop/conf/hue-overrides.ini
+    networks:
+      - hadoop-net
+
+networks:
+  hadoop-net:
+    external:
+      name: dock_net

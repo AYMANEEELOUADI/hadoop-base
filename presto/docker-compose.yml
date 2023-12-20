@@ -1,0 +1,15 @@
+version: "3"
+services:
+  presto : 
+    image : presto:0.181
+    ports : 
+      - 8885:8080
+    volumes:
+      - ./etc:/opt/presto/etc
+      - ./data:/opt/presto/data
+    networks:
+      - hadoop-network
+networks:
+  hadoop-network:
+    external:
+      name: dock_net

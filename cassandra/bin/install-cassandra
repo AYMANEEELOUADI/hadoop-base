@@ -1,0 +1,12 @@
+#!/bin/bash
+
+VERSION = 4.0.7
+
+# Configure
+CONFIG=/root/apache-cassandra/conf/cassandra.yaml
+ENV=/root/apache-cassandra/conf/cassandra-env.sh
+sed -i -e "s/^# num_tokens.*/num_tokens: 256/"      $CONFIG
+sed -i -e "s/^listen_address.*/listen_address: /"   $CONFIG
+sed -i -e "s/^rpc_address.*/rpc_address: 0.0.0.0/"  $CONFIG
+sed -i -e 's/seeds: "192.168.56.114"/seeds: "cass1"/g' $CONFIG
+sed -i -e "s/Xss180k/Xss300k/g" $ENV

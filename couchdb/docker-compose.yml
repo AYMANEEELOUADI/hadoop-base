@@ -1,0 +1,18 @@
+version: '2'
+volumes:
+  couchdbdata:
+services:
+  nosql-couchdb:
+    build: .
+    image: "nosql-couchdb"
+    container_name: "nosql-couchdb"
+    hostname: "nosql-couchdb"
+    tty: true
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=admin
+    volumes:
+      - couchdbdata:/opt/couchdb/data
+      - ../../labs:/app/couchdb/labs
+    ports:
+      - 5984:5984

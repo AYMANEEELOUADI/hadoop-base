@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Hive" id="Project_1d68da4" database="Hive" >
+	<schema name="dtm" catalogname="" >
+		<table name="annee_dim" >
+			<column name="id_annee" type="int" length="10" decimal="0" jt="4" />
+			<column name="code_annee" type="varchar" length="10" decimal="0" jt="12" />
+			<column name="no_ann" type="int" length="10" decimal="0" jt="4" />
+			<column name="no_ann_n1" type="int" length="10" decimal="0" jt="4" />
+			<column name="no_per_deb_ann" type="int" length="10" decimal="0" jt="4" />
+			<column name="no_per_fin_ann" type="int" length="10" decimal="0" jt="4" />
+		</table>
+		<table name="mois_dim" >
+			<column name="id_mois" type="int" length="10" decimal="0" jt="4" />
+			<column name="no_ann" type="int" length="10" decimal="0" jt="4" />
+			<column name="code_annee" type="varchar" length="10" decimal="0" jt="12" />
+			<column name="ch_lib_smstr" type="varchar" length="20" decimal="0" jt="12" />
+			<column name="code_semestre" type="varchar" length="20" decimal="0" jt="12" />
+			<column name="no_smstr" type="int" length="10" decimal="0" jt="4" />
+			<column name="ch_lib_trim" type="varchar" length="20" decimal="0" jt="12" />
+			<column name="code_trimestre" type="varchar" length="20" decimal="0" jt="12" />
+			<column name="no_trim" type="int" length="10" decimal="0" jt="4" />
+			<column name="ch_lib_mois" type="varchar" length="20" decimal="0" jt="12" />
+			<column name="code_mois" type="varchar" length="5" decimal="0" jt="12" />
+			<column name="no_mois" type="int" length="10" decimal="0" jt="4" />
+			<column name="no_jrs_mois" type="int" length="10" decimal="0" jt="4" />
+			<column name="no_jrs_deb_ann" type="int" length="10" decimal="0" jt="4" />
+			<column name="no_per_deb_ann" type="int" length="10" decimal="0" jt="4" />
+			<column name="no_per_fin_ann" type="int" length="10" decimal="0" jt="4" />
+			<column name="fk_annee" type="int" length="10" decimal="0" jt="4" />
+		</table>
+		<table name="semaine_dim" >
+			<column name="id_sem" type="int" length="10" decimal="0" jt="4" />
+			<column name="fk_annee" type="int" length="10" decimal="0" jt="4" />
+			<column name="code_semaine" type="varchar" length="20" decimal="0" jt="12" />
+			<column name="no_sem" type="int" length="10" decimal="0" jt="4" />
+			<column name="ch_lib_sem" type="varchar" length="20" decimal="0" jt="12" />
+			<column name="no_per_deb_ann" type="int" length="10" decimal="0" jt="4" />
+			<column name="no_per_fin_ann" type="int" length="10" decimal="0" jt="4" />
+		</table>
+	</schema>
+	<schema name="ods" catalogname="" >
+		<table name="dim_agc" >
+			<column name="id_agec" type="int" length="10" decimal="0" jt="4" />
+			<column name="ch_cod_agec" type="string" length="2147483647" decimal="0" jt="12" />
+			<column name="fk_grp_res" type="int" length="10" decimal="0" jt="4" />
+			<column name="ch_lib_long_agec" type="string" length="2147483647" decimal="0" jt="12" />
+			<column name="fk_categ_agec" type="int" length="10" decimal="0" jt="4" />
+		</table>
+		<table name="dim_grp" >
+			<column name="id_grp" type="int" length="10" decimal="0" jt="4" />
+			<column name="ch_cod_grp" type="string" length="2147483647" decimal="0" jt="12" />
+			<column name="fk_res_res" type="int" length="10" decimal="0" jt="4" />
+			<column name="ch_lib_long_grp" type="string" length="2147483647" decimal="0" jt="12" />
+		</table>
+		<table name="dim_ptf" >
+			<column name="id_tech_ptf" type="int" length="10" decimal="0" jt="4" />
+			<column name="ch_cod_ptf" type="string" length="2147483647" decimal="0" jt="12" />
+			<column name="fk_agec" type="int" length="10" decimal="0" jt="4" />
+		</table>
+		<table name="dim_reg" >
+			<column name="id_tech_dir_res" type="int" length="10" decimal="0" jt="4" />
+			<column name="ch_cod_dir_res" type="string" length="2147483647" decimal="0" jt="12" />
+			<column name="ch_lib_dir_res" type="string" length="2147483647" decimal="0" jt="12" />
+		</table>
+		<table name="dim_res" >
+			<column name="id_res_res" type="int" length="10" decimal="0" jt="4" />
+			<column name="ch_cod_res" type="string" length="2147483647" decimal="0" jt="12" />
+			<column name="ch_lib_long_res" type="string" length="2147483647" decimal="0" jt="12" />
+			<column name="fk_dir_res" type="int" length="10" decimal="0" jt="4" />
+		</table>
+	</schema>
+	<connector name="Hive" database="Hive" driver_class="org.apache.hive.jdbc.HiveDriver" driver_jar="hive-jdbc-4.0.0-alpha-1-standalone.jar" driver_desc="Standard" url="jdbc:hive2://192.168.56.114:10000/dtm" host="192.168.56.114" port="9083" instance="aymane" user="root" />
+	<layout name="Sample Layout with Tools" id="Layout_58188a9" show_column_type="y" show_relation="columns" >
+		<entity schema=".dtm" name="annee_dim" color="BED3F4" x="288" y="176" />
+		<entity schema=".dtm" name="mois_dim" color="BED3F4" x="272" y="384" />
+		<entity schema=".dtm" name="semaine_dim" color="BED3F4" x="48" y="160" />
+		<callout x="288" y="80" pointer="Round" >
+			<comment><![CDATA[This is a sample layout with tools. 
+Double-click any table, column or foreign key to edit.
+For better understanding the schema create multiple layouts. 
+Layouts and schema structure are saved to project file.]]></comment>
+		</callout>
+		<group name="annee_dim" color="ECF0F7" >
+			<entity schema=".dtm" name="annee_dim" />
+			<entity schema=".dtm" name="mois_dim" />
+			<entity schema=".dtm" name="semaine_dim" />
+		</group>
+		<script name="Sample SQL Editor" id="Editor_2eb8ad2" language="SQL" >
+			<string><![CDATA[SELECT id_annee, code_annee, no_ann, no_ann_n1, no_per_deb_ann, no_per_fin_ann
+FROM
+	annee_dim m;]]></string>
+		</script>
+		<browser id="Browse_5ad1089" name="Sample Relational Data Browse" confirm_updates="y" >
+			<browse_table schema=".dtm" entity="annee_dim" x="20" y="20" width="400" height="300" />
+		</browser>
+		<query id="Query_29eb451" name="Sample Query Builder" >
+			<query_table schema=".dtm" name="annee_dim" alias="ad" x="48" y="48" >
+				<column name="id_annee" />
+				<column name="code_annee" />
+				<column name="no_ann" />
+				<column name="no_ann_n1" />
+				<column name="no_per_deb_ann" />
+				<column name="no_per_fin_ann" />
+			</query_table>
+		</query>
+	</layout>
+	<layout name="dtm" id="Layout_1dc6e58" show_relation="columns" >
+		<entity schema=".dtm" name="semaine_dim" color="BED3F4" x="48" y="256" />
+		<entity schema=".dtm" name="annee_dim" color="BED3F4" x="240" y="48" />
+		<entity schema=".dtm" name="mois_dim" color="BED3F4" x="240" y="256" />
+		<script name="SQL_Editor" id="Editor_51e3f7a" language="SQL" >
+			<string><![CDATA[CREATE TABLE jour_dim (
+  ID_JRS INT,
+  FK_MOIS INT,
+  FK_SEMAINE INT,
+  CODE_JOUR STRING,
+  NO_JOUR INT,
+  NO_JOUR_SEM INT,
+  CH_LIB_JOUR STRING,
+  DT_JRS TIMESTAMP,
+  DT_PREM_JRS_ANN TIMESTAMP,
+  DT_DERN_JRS_ANN TIMESTAMP,
+  DT_DERN_JRS_ANN_N1 TIMESTAMP,
+  NO_PER_DEB_ANN INT,
+  NO_PER_FIN_ANN INT,
+  FLG_JOUV INT
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES (
+  "separatorChar" = ",",
+  "quoteChar" = "\""
+)
+STORED AS TEXTFILE;
+
+-- Load data into the table
+LOAD DATA INPATH '/tmp/data/datasets/jour_dim.csv' INTO TABLE jour_dim;]]></string>
+		</script>
+		<script name="jour_dim" id="Editor_3beb223" language="SQL" >
+			<string><![CDATA[CREATE TABLE jour_dim ( 
+	id_jrs               int   ,
+	fk_mois              int   ,
+	fk_semaine           int   ,
+	code_jour            varchar(25)   ,
+	no_jour              int   ,
+	no_jour_sem          int   ,
+	ch_lib_jour          varchar(20)   ,
+	dt_jrs               date   ,
+	dt_prem_jrs_ann      date   ,
+	dt_dern_jrs_ann      date   ,
+	dt_dern_jrs_ann_n1   date   ,
+	no_per_deb_ann       int   ,
+	no_per_fin_ann       int   ,
+	flg_jouv             int   
+ );]]></string>
+		</script>
+		<script name="jour_dim_001" id="Editor_35b61c9" language="SQL" >
+			<string><![CDATA[SELECT id_jrs, fk_mois, fk_semaine, code_jour, no_jour, no_jour_sem, ch_lib_jour, dt_jrs, dt_prem_jrs_ann, dt_dern_jrs_ann, 
+	dt_dern_jrs_ann_n1, no_per_deb_ann, no_per_fin_ann, flg_jouv
+FROM
+	jour_dim m;]]></string>
+		</script>
+	</layout>
+	<layout name="ods" id="Layout_3afd949" show_relation="columns" >
+		<entity schema=".ods" name="dim_agc" color="3986C1" x="656" y="48" />
+		<entity schema=".ods" name="dim_grp" color="BED3F4" x="48" y="48" />
+		<entity schema=".ods" name="dim_ptf" color="BED3F4" x="240" y="48" />
+		<entity schema=".ods" name="dim_reg" color="BED3F4" x="240" y="224" />
+		<entity schema=".ods" name="dim_res" color="BED3F4" x="432" y="224" />
+	</layout>
+</project>

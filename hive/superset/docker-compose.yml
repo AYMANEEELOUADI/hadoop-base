@@ -1,0 +1,16 @@
+version: '3'
+services:
+  superset:
+    build: /
+    env_file:
+      - /superset.env
+    ports:
+      - "8088:8088"
+    volumes:
+      - ./superset-data:/app/superset_home
+    networks:
+      - hadoop-network
+networks:
+  hadoop-network:
+    external:
+      name: dock_net

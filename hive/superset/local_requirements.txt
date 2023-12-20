@@ -1,0 +1,4 @@
+mysqlclient==1.3.13
+psycopg2==2.9.1
+gunicorn
+gevent==21.8.0
