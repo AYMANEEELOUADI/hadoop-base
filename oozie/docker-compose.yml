@@ -1,0 +1,35 @@
+version: "3"
+services:
+  namenode:
+    image: namenode:2.7.1
+    hostname : namenode-master
+    ports:
+      - "9870:9870"
+      - "50070:50070"
+      - "8020:8020"
+    networks:
+      - oozie
+  datanode :
+    image: datanode:2.7.1
+    depends_on:
+      - namenode
+    ports :
+      - "50075:50075"
+    networks:
+      - oozie
+  oozie-worker:
+    image: oozie:4.2.0
+    depends_on:
+      - namenode
+      - datanode
+    ports :
+      - "11000:11000"
+      - "11001:11001"
+    networks:
+      - oozie
+    volumes:
+      - ./job/data:/var/lib/oozie/data  
+networks:
+  oozie:
+    external : true
+    name : oozie
