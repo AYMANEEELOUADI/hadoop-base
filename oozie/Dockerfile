@@ -4,8 +4,9 @@ FROM hadoop_base:2.7.1
 ARG OOZIE_VERSION=4.2.0
 ARG HADOOP_VERSION=2.7.1
 ARG SQL_CONNECTOR_VERSION=5.1.49
-ARG HADOOP_HOME=/opt/hadoop-2.7.1
+ARG HADOOP_HOME=/opt/hadoop-${HADOOP_VERSION}
 ARG MAVEN_VERSION=3.6.3
+ARG OOZIE_HOME=/opt/oozie-${OOZIE_VERSION}
 # copy oozie build
 COPY oozie-${OOZIE_VERSION}.tar.gz /tmp/oozie-${OOZIE_VERSION}.tar.gz
 COPY mysql-connector-java-5.1.49.tar.gz /tmp/mysql-connector-java-5.1.49.tar.gz
@@ -37,13 +38,15 @@ COPY main/pom.xml ${OOZIE_HOME}/
 RUN export M2_HOME=/opt/apache-maven-${MAVEN_VERSION} && export PATH=/opt/apache-maven-${MAVEN_VERSION}/bin:$PATH \
  && ${OOZIE_HOME}/bin/mkdistro.sh -DskipTests -P hadoop-2 -Dhadoopversion=2.7.1  -DjavaVersion=1.8 -DtargetJavaVersion=1.8 -Dmaven.javadoc.skip=true -e 
 RUN mkdir /usr/local/oozie && mv  $OOZIE_HOME/distro/target/oozie-${OOZIE_VERSION}-distro/oozie-${OOZIE_VERSION} /usr/local/oozie && export OOZIE_HOME=/usr/local/oozie/oozie-4.2.0 
-ARG OOZIE_DIST_HOME=/usr/local/oozie/oozie-${OOZIE_VERSION}
+ENV OOZIE_DIST_HOME=/usr/local/oozie/oozie-${OOZIE_VERSION}
 RUN apt-get update && apt-get install -y gnupg2
 RUN  apt-get -y update &&  apt-get install -y unzip zip --force-yes
 RUN mv $OOZIE_HOME/libext ${OOZIE_DIST_HOME}/libext
 RUN ln -s /var/log/oozie ${OOZIE_DIST_HOME}/log
 RUN ln -s /var/lib/oozie/data ${OOZIE_DIST_HOME}/data
+RUN rm ${OOZIE_DIST_HOME}/conf/oozie-site.xml
+COPY oozie-site.xml ${OOZIE_DIST_HOME}/conf/
 RUN ${OOZIE_DIST_HOME}/bin/oozie-setup.sh prepare-war
-WORKDIR /usr/local/oozie/oozie-${OOZIE_VERSION}
+WORKDIR ${OOZIE_DIST_HOME}
 RUN export PATH=$OOZIE_DIST_HOME/bin:$PATH
 CMD [ "./bin/oozied.sh","run" ]
