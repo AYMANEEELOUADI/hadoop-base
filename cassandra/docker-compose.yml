@@ -1,22 +1,15 @@
 version: "3"
 services:
-  cassandra1:
-    image: cassandra:4.0.7
+  cassandra:
+    build: ./
+    #image: cassandra:4.0.7
     command: /usr/bin/start-cassandra
+    hostname: cassandra
     ports:
       - 9160:9160
       - 9042:9042
     environment:
-      DNS: 192.168.56.114
-    hostname: cass1
-    networks:
-      - hadoop-network
-  cassandra2:
-    image: cassandra:4.0.7
-    command: /usr/bin/start-cassandra
-    environment:
-      DNS: 192.168.56.114
-    hostname: cass2
+      DNS: localhost
     networks:
       - hadoop-network
 networks:

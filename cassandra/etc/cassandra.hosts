@@ -1,4 +1,4 @@
-address="/cass1/192.168.100.1"
+address="/cassandra/127.0.0.1"
 address="/cass2/192.168.100.2"
 address="/cass3/192.168.100.3"
 address="/cass4/192.168.100.4"
